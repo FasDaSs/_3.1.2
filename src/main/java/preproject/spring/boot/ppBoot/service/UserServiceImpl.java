@@ -2,43 +2,45 @@ package preproject.spring.boot.ppBoot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import preproject.spring.boot.ppBoot.dao.UserDao;
 import preproject.spring.boot.ppBoot.model.User;
+import preproject.spring.boot.ppBoot.repository.UserRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userDao;
+    private final UserRepository userRepository;
 
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
-    @Transactional
+    //@Transactional
     public void add(User user) {
-        userDao.add(user);
+        userRepository.save(user);
     }
 
     @Override
     public List<User> listUsers() {
-        return userDao.listUsers();
+        return userRepository.findAll();
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void updateUser(User user) {
-        userDao.updateUser(user);
+        userRepository.save(user);
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public void deleteUser(long id) {
-        userDao.deleteUser(id);
+        userRepository.deleteById(id);
     }
 
     @Override
     public User getById(long id) {
-        return userDao.getById(id);
+        return userRepository.findById(id).orElse(null);
     }
 }
