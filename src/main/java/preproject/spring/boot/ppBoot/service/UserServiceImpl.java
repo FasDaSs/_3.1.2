@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
     private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -17,7 +16,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    //@Transactional
     public void add(User user) {
         userRepository.save(user);
     }
@@ -28,13 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    //@Transactional
     public void updateUser(User user) {
         userRepository.save(user);
     }
 
     @Override
-    //@Transactional
     public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
